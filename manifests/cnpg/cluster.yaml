@@ -1,0 +1,21 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: cnpg-cluster
+  namespace: cnpg
+spec:
+  imageName: ghcr.io/cloudnative-pg/postgresql:18.3-minimal-trixie
+  enableSuperuserAccess: true
+  instances: 1
+  postgresql:
+    parameters:
+      shared_buffers: "128MB"
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: 500m
+    limits:
+      memory: "512Mi"
+      cpu: 500m
+  storage:
+    size: 2Gi
