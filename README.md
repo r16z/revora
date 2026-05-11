@@ -91,3 +91,5 @@ helm repo update
 helm fetch --untar traefik/traefik --version 40.0.1
 ```
 
+### Gatus Repo: [GitHub](https://github.com/r16z/uptime-monitoring)
+
