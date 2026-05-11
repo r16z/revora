@@ -25,6 +25,28 @@ A Kubernetes-native platform ecosystem leveraging GitOps, centralized identity, 
 - Configured DNS A records for Keycloak, ArgoCD, and Gatus endpoints.
 - Deployed Istio and enabled automatic sidecar injection for Keycloak, ArgoCD, Gatus, Traefik, and PostgreSQL workloads.
 
+## Keycloak <-> ArgoCD OIDC Authentication & Authorization Flow
+
+```
+User -> ArgoCD -> Keycloak (OIDC) -> Signed JWT Tokens -> Token Validation -> RBAC Mapping -> Authorized Session
+```
+
+### Flow
+1. User accesses Argo CD through the Traefik ingress endpoint.
+2. ArgoCD detects the absence of an authenticated session and initiates the OIDC Authorization Code Flow with Keycloak as the centralized Identity Provider (IdP).
+3. The user is securely redirected to Keycloak, where authentication is performed independently of ArgoCD, ensuring credential isolation and centralized identity management.
+4. Upon successful authentication, Keycloak issues cryptographically signed JWT tokens containing identity, group, role, and authorization claims.
+5. The browser is redirected back to ArgoCD with a temporary authorization code, which is securely exchanged for ID and access tokens over TLS-protected channels.
+6. ArgoCD validates:
+- JWT signature integrity
+- token expiration (exp)
+- issuer (iss)
+- audience (aud)
+- nonce and OIDC claims
+- configured scopes and redirect URIs
+7. ArgoCD extracts group and role claims from the validated JWT and maps them to internal RBAC policies for fine-grained authorization control.
+8. A trusted authenticated session is established, and access is granted strictly based on centrally managed RBAC permissions.
+
 ## Helm Repos
 
 ### CN-PG
