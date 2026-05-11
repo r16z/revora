@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: psql-client
+  namespace: cnpg
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: psql-client
+  template:
+    metadata:
+      labels:
+        app: psql-client
+    spec:
+      containers:
+        - name: psql-client
+          image: alpine/psql:18.3
+          command:
+            - sleep
+            - infinity
+          envFrom:
+            - secretRef:
+                name: psql-client-secret

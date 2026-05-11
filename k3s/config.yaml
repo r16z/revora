@@ -1,0 +1,7 @@
+write-kubeconfig-mode: "0644"
+
+tls-san:
+  - "revora-k3s-vm.tail8f71cf.ts.net"
+
+disable:
+  - metrics-server
