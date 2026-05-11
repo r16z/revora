@@ -1,6 +1,14 @@
 # Revora
 A Kubernetes-native platform ecosystem leveraging GitOps, centralized identity, and service mesh principles using K3s, Argo CD, Keycloak, and Istio.
 
+## Core Services
+
+| Service | URL |
+|---|---|
+| ArgoCD | https://argocd.r16z.org |
+| Keycloak | https://auth.r16z.org/auth |
+| Gatus | https://status.r16z.org |
+
 ## Implementation Summary
 - Provisioned a K3s cluster on a GCP Compute Engine instance.
 - Integrated the compute instance into the Tailscale network for secure remote kubectl access.
