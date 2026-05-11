@@ -28,3 +28,10 @@ helm repo add argo https://argoproj.github.io/argo-helm
 helm repo update
 helm fetch --untar argo/argo-cd --version 9.5.13
 ```
+
+### Stakater Reloader
+```
+helm repo add stakater https://stakater.github.io/stakater-charts
+helm repo update
+helm fetch --untar stakater/reloader --version 2.2.11
+```

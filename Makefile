@@ -3,6 +3,7 @@ create-ns:
 	kubectl create ns cnpg || true
 	kubectl create ns keycloakx || true
 	kubectl create ns argocd || true
+	kubectl create ns reloader || true
 
 install-sealed-secrets:
 	helm upgrade sealed-secrets \
@@ -38,3 +39,10 @@ install-argocd:
 		--values values/argo-cd/values.yaml \
 		--install \
 		--namespace argocd
+
+install-reloader:
+	helm upgrade reloader \
+		charts/reloader \
+		--values values/reloader/values.yaml \
+		--install \
+		--namespace reloader

@@ -4,5 +4,4 @@ tls-san:
   - "revora-k3s-vm.tail8f71cf.ts.net"
 
 disable:
-  - traefik
   - metrics-server
