@@ -1,5 +1,23 @@
-# revora
-A Kubernetes-native GitOps platform ecosystem
+# Revora
+A Kubernetes-native platform ecosystem leveraging GitOps, centralized identity, and service mesh principles using K3s, Argo CD, Keycloak, and Istio.
+
+## Implementation Summary
+- Provisioned a K3s cluster on a GCP Compute Engine instance.
+- Integrated the compute instance into the Tailscale network for secure remote kubectl access.
+- Deployed Sealed Secrets for GitOps-compatible secret management.
+- Deployed CloudNativePG and provisioned a single-node PostgreSQL cluster for Keycloak and Gatus.
+- Deployed Keycloak with PostgreSQL as the backing datastore.
+- Deployed Argo CD for GitOps-based application delivery.
+- Generated wildcard TLS certificates for r16z.org, stored them in K3s, and configured them through Traefik TLSStore.
+- Exposed Keycloak and ArgoCD via Traefik ingress routing.
+- Integrated Keycloak with ArgoCD using the OIDC authentication flow.
+- Created a dedicated repository containing Kubernetes manifests for Gatus deployment.
+- Deployed Stakater Reloader to enable automatic rollout restarts on ConfigMap updates.
+- Configured a dedicated ArgoCD application for automated Gatus deployment into K3s.
+- Configured DNS A records for Keycloak, ArgoCD, and Gatus endpoints.
+- Deployed Istio and enabled automatic sidecar injection for Keycloak, ArgoCD, Gatus, Traefik, and PostgreSQL workloads.
+
+## Helm Repos
 
 ### CN-PG
 ```
@@ -34,4 +52,11 @@ helm fetch --untar argo/argo-cd --version 9.5.13
 helm repo add stakater https://stakater.github.io/stakater-charts
 helm repo update
 helm fetch --untar stakater/reloader --version 2.2.11
+```
+
+### Traefik
+```
+helm repo add traefik https://traefik.github.io/charts
+helm repo update
+helm fetch --untar traefik/traefik --version 40.0.1
 ```

@@ -5,3 +5,4 @@ tls-san:
 
 disable:
   - metrics-server
+  - traefik

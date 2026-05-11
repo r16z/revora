@@ -1,0 +1,12 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  namespace: istio-system
+  name: control-plane
+spec:
+  profile: minimal
+  revision: "1-29-2"
+  tag: 1.29.2
+  values:
+    global:
+      imagePullPolicy: IfNotPresent
